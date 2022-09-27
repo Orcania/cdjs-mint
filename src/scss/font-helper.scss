@@ -1,0 +1,21 @@
+// import your fonts here and create a font-face rule for them
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=PT+Mono&display=swap');
+
+
+.has-font-airborne {
+    font-family: 'Airborne', sans-serif;
+}
+
+.has-font-montserrat {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.has-font-ptmono {
+    font-family: 'PT Mono', monospace;
+}
+
+// *:not(.has-font-airborne):not(i) {
+//     font-family: 'Montserrat', sans-serif;
+// }

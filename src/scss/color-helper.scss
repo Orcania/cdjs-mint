@@ -1,0 +1,124 @@
+@use 'sass:color';
+@use 'sass:map';
+@import './vars';
+
+$levels: 10;
+$corners: 'top', 'right', 'bottom', 'left';
+
+@mixin bg-blur-list {
+    @for $i from 1 through 4 {
+        .has-bg-blur-#{$i} {
+            -webkit-backdrop-filter: blur(#{$i * 5}px);
+            backdrop-filter: blur(#{$i * 5}px);
+        }
+    }
+}
+
+@include bg-blur-list;
+
+@mixin generate-color-classes($color, $colorName) {
+    .has-bg-#{$colorName} {
+        background: $color !important;
+    }
+
+    .is-#{$colorName} {
+        background: $color !important;
+        border-color: $color !important;
+        color: black !important;
+    }
+
+    .input.is-#{$colorName} {
+        background: unset !important;
+        border-color: rgba($color, 0.5) !important;
+
+        &:focus {
+            border-color: $color !important;
+            box-shadow: 0 0 0 0.125em rgba($color, 0.25);
+        }
+    }
+
+    .button.is-#{$colorName} {
+        background: $color !important;
+        border-color: $color !important;
+        color: white !important;
+
+        &:hover:enabled {
+            background-color: lighten($color, 10) !important;
+            box-shadow: 0 0 0 0.125em rgba($color, 0.25) !important;
+        }
+
+        &:active:enabled {
+            background-color: lighten($color, 20) !important;
+            box-shadow: 0 0 0 0.125em rgba($color, 0.25) !important;
+        }
+
+        &:focus {
+            background-color: lighten($color, 10) !important;
+            box-shadow: 0 0 0 0.125em rgba(rgb(0, 255, 213), 0.5) !important;
+        }
+    }
+
+    .button.is-#{$colorName}.outlined {
+        background-color: rgba($color, 0.25) !important;
+        border-color: $color !important;
+        color: lighten($color, 10) !important;
+
+        &:hover:enabled {
+            background-color: $color !important;
+            box-shadow: 0 0 0 0.125em rgba($color, 0.25) !important;
+            color: white !important;
+        }
+
+        &:active:enabled {
+            background-color: lighten($color, 20) !important;
+            box-shadow: 0 0 0 0.125em rgba($color, 0.25) !important;
+            color: white !important;
+        }
+
+        &:focus {
+            background-color: $color !important;
+            box-shadow: 0 0 0 0.125em rgba(rgb(0, 255, 213), 0.5) !important;
+            color: white !important;
+        }
+    }
+
+    .has-text-#{$colorName} {
+        color: $color !important;
+    }
+
+    @for $i from 1 through $levels {
+        .has-bg-#{$colorName}-o-#{$i} {
+            background-color: rgba($color, $i/10) !important;
+        }
+
+        .has-text-#{$colorName}-o-#{$levels} {
+            color: rgba($color, $levels/100) !important;
+        }
+    }
+
+    @for $i from 1 through 20 {
+        @for $j from 1 through 5 {
+            .has-border-#{$j}-#{$colorName}-o-#{($i)*5} {
+                border: #{$j}px solid rgba($color, $i/10) !important;
+            }
+        }
+    }
+
+    @each $corner in $corners {
+        .has-#{$corner}-border-#{$colorName} {
+            border-#{$corner}: 1px solid $color;
+        }
+    }
+}
+
+@each $colorName, $color in $hcolors {
+    @include generate-color-classes($color, $colorName);
+}
+
+.has-bg-transparent {
+    background: rgba(0, 0, 0, 0) !important;
+}
+
+.is-borderless {
+    border: none !important;
+}

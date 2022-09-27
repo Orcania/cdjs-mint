@@ -1,0 +1,12 @@
+$levels: 10;
+
+@mixin generate-border-radius() {
+    @for $i from 0 through $levels {
+        $rad: ($i * 2) + 8;
+        .has-border-radius-#{$rad} {
+            border-radius: #{$rad}px !important;
+        }
+    }
+}
+
+@include generate-border-radius;

@@ -1,0 +1,64 @@
+@import './vars';
+
+.table {
+    width: 100%;
+
+    /* make table head sticky */
+    thead {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+    }
+
+    tbody {
+        tr {
+            border: 1px solid rgba(white, 0.5);
+            td {
+                border: 0 !important;
+                padding: 1.5rem;
+            }
+        }
+    }
+
+    .ct-td-title {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .table {
+        thead {
+            display: none;
+        }
+
+        tbody tr {
+            border: 1px solid #dbdbdb;
+
+            &:last-child {
+                border: none !important;
+            }
+
+            td {
+                display: block;
+                border: 0 !important;
+                width: 100% !important;
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .ct-td-title {
+                    display: block;
+                    padding: 0.5rem;
+                    width: 30%;
+                }
+
+                .ct-td-content {
+                    display: block;
+                    padding: 0.5rem;
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
+}

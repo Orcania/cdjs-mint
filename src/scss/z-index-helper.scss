@@ -1,0 +1,5 @@
+@import './vars';
+
+.is-above-glasspanel {
+    z-index: $z-index-glasspanel + 1 !important;
+}

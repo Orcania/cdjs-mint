@@ -1,0 +1,62 @@
+@import '~bulma/sass/utilities/mixins';
+
+.resize-manager{
+
+    // @include until($desktop) {
+    //   border-bottom: 1px solid green;
+    // }
+    //
+    // @include from($tablet) {
+    //   border-left: 1px solid yellow;
+    // }
+    @include desktop-only{
+        min-width: 430px !important;
+        max-width: 430px !important;
+    }
+
+    @include widescreen-only {
+        min-width: 430px !important;
+        max-width: 430px !important;
+    }
+
+
+
+    @include from($fullhd){
+        min-width: 430px !important;
+        max-width: 430px !important;
+    }
+
+    @include mobile {
+        width: 100% !important;
+        max-width: 500px !important;
+        padding: 0px 1.5rem;
+    }
+
+
+}
+
+.resize-manager2{
+    @include desktop-only{
+        min-width: 350px !important;
+        max-width: 350px !important;
+    }
+
+    @include widescreen-only {
+        min-width: 350px !important;
+        max-width: 350px !important;
+    }
+
+    @include from($fullhd){
+        min-width: 380px !important;
+        max-width: 380px !important;
+    }
+
+    @include mobile {
+        width: 100% !important;
+        max-width: 500px !important;
+        padding: 0px 1.5rem;
+    }
+
+
+
+}

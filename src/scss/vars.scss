@@ -1,0 +1,19 @@
+@use 'sass:map';
+
+$hpurple: #bf9dff;
+$hblue: #6a8cd4;
+$hdark: #250e45;
+
+$hgra1: linear-gradient(90deg, $hpurple 0%, $hblue 100%);
+
+$hcolors: (
+    hpurple: $hpurple,
+    hblue: $hblue,
+    hdark: $hdark,
+);
+
+$hgras: (
+    hgra1: $hgra1,
+);
+
+$z-index-glasspanel: 100;

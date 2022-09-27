@@ -1,0 +1,62 @@
+@import './vars';
+
+.has-animated-gradient {
+    background-size: 400% 400% !important;
+
+    -webkit-animation: gradientAnimation 15s ease infinite;
+    -moz-animation: gradientAnimation 15s ease infinite;
+    animation: gradientAnimation 15s ease infinite !important;
+}
+
+.has-hover-animated-gradient:hover{
+    @extend .has-animated-gradient;
+}
+
+@-webkit-keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@-moz-keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+@keyframes gradientAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@mixin generate-gradients-classes($gradient, $gradientName) {
+    .has-background-#{$gradientName} {
+        background: $gradient !important;
+    }
+
+    .is-#{$gradientName} {
+        background: $gradient !important;
+        border: none !important;
+    }
+}
+
+@each $gradientName, $gradient in $hgras {
+    @include generate-gradients-classes($gradient, $gradientName);
+}

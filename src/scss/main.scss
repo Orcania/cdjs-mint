@@ -1,0 +1,34 @@
+@import './font-helper';
+@import './color-helper';
+@import './gradient-helper';
+@import './z-index-helper';
+@import './custom-notifications';
+@import './scroll-helper';
+@import './size-helper';
+@import './user-select-helper';
+@import './globals.scss';
+@import './button-helper';
+@import './border-helper';
+@import './vars';
+@import './bulma-helper';
+@import './bulma-custom-vars';
+@import '~bulma';
+
+html,
+body,
+#__next {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    @extend .coolscroll;
+    scroll-behavior: smooth;
+}
+
+#__next {
+    height: 100%;
+    position: relative;
+}
