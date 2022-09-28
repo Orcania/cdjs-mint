@@ -72,8 +72,7 @@ const Navbar = () => {
             <div className="navbar-brand  py-2">
                 <Link href="/home">
                     <a className="navbar-item" onClick={handleNavbarItemClick} role="button">
-                        <img src="./media/logo.png" width="150" />
-                        <h1 className="title is-5 has-text-white mb-0">&nbsp; Orcania</h1>
+                        <img src="./media/logo.png" width="120" />
                     </a>
                 </Link>
 
@@ -93,58 +92,10 @@ const Navbar = () => {
 
             <div className={`navbar-menu ${mobileActive ? 'is-active' : ''}`}>
                 <div className="navbar-start">
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <a className="navbar-link ">
-                            <i className="far fa-exchange" /> &nbsp; Exchange
-                        </a>
-
-                        <div className="navbar-dropdown has-background-transparent">
-                            <Link href="/swap">
-                                <a className="navbar-item has-text-white" onClick={handleNavbarItemClick} role="button">
-                                    Swap
-                                </a>
-                            </Link>
-
-                            <Link href="/liquidity">
-                                <a className="navbar-item has-text-white" onClick={handleNavbarItemClick} role="button">
-                                    Liquidity
-                                </a>
-                            </Link>
-
-                            {/* <Link href="/liquidity/add">
-                                <a className="navbar-item has-text-white">liquidity - add</a>
-                            </Link>
-
-                            <Link href="/liquidity/remove">
-                                <a className="navbar-item has-text-white">liquidity - remove (Cooming Soon)</a>
-                            </Link>  */}
-                        </div>
-                    </div>
-
-                    <div className="navbar-item has-dropdown is-hoverable">
-                        <a className="navbar-link ">
-                            <i className="fa-solid fa-chart-line" /> &nbsp; Stats
-                        </a>
-
-                        <div className="navbar-dropdown has-background-transparent">
-                            <Link href="/stats">
-                                <a className="navbar-item has-text-white" onClick={handleNavbarItemClick} role="button">
-                                    Stats
-                                </a>
-                            </Link>
-
-                            <Link href="/portfolio">
-                                <a className="navbar-item has-text-white" onClick={handleNavbarItemClick} role="button">
-                                    Portfolio
-                                </a>
-                            </Link>
-                        </div>
-                    </div>
-
                     <div className="navbar-item ">
-                        <Link href="/faucet">
+                        <Link href="/mint">
                             <a className="navbar-item has-text-white" onClick={handleNavbarItemClick} role="button">
-                                <i className="fa-solid fa-tint" /> &nbsp; Faucet
+                                <i className="fa-solid fa-hexagon-vertical-nft" /> &nbsp; MINT
                             </a>
                         </Link>
                     </div>
@@ -156,7 +107,7 @@ const Navbar = () => {
                             <div className="navbar-item">
                                 <button
                                     id="connect-button"
-                                    className="button is-fullwidth is-rounded has-text-hpink has-background-hpink-o-2 has-border-2-hpink-o-10 is-shadowless navbar-button"
+                                    className="button is-fullwidth is-rounded is-hblue has-background-hpink-o-2 has-border-2-hpink-o-10 is-shadowless navbar-button"
                                     type="button"
                                     onClick={() => {}}
                                 >

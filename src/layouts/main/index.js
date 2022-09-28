@@ -7,7 +7,7 @@ const MainLayout = props => {
     return (
         <>
             <Navbar />
-            <div className="py-6">{children}</div>
+            <div style={{ paddingTop: '6rem' }}>{children}</div>
             <Footer />
         </>
     );
