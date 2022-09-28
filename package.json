@@ -12,6 +12,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@celeste-js/core": "^1.3.2",
+    "@celeste-js/react": "^1.3.0-beta.2",
+    "@celeste-js/store": "^2.3.0",
     "bulma": "^0.9.4",
     "next": "^12.2.0",
     "node-sass": "^7.0.1",

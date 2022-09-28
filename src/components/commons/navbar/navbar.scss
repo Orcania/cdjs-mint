@@ -1,0 +1,88 @@
+@import 'src/scss/vars.scss';
+
+// .custom-navbar {
+//     transition: 0.5s;
+
+//     .navbar-menu {
+//         max-height: unset !important;
+//         .navbar-item {
+//             color: $md-black !important;
+//             margin-left: 1.5rem !important;
+//             margin-right: 1.5rem !important;
+
+//             &:hover {
+//                 background: rgba(0, 0, 0, 0) !important;
+//                 color: $md-ref-primary-10 !important;
+//             }
+
+//             &.is-active {
+//                 border-bottom: 3px solid $md-ref-primary-10 !important;
+//             }
+
+//             &:focus {
+//                 background: rgba($md-black, 0) !important;
+//             }
+//         }
+//         &.has-navbar-bg-color {
+//             background: white !important;
+//             border-bottom: none !important;
+//             box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5) !important;
+//         }
+
+//         &.is-hidden-up {
+//             transform: translateY(-100%);
+//         }
+//     }
+
+//     .navbar-dropdown {
+//         background: white !important;
+//         border: none;
+//     }
+
+//     .navbar-link {
+//         background: transparent !important;
+//         color: $md-ref-primary-10;
+
+//         &::after {
+//             border-color: $md-black !important;
+//         }
+
+//         &:hover {
+//             color: $md-ref-primary-10 !important;
+//         }
+//     }
+
+//     .navbar-item.has-dropdown {
+//         &:hover .navbar-link {
+//             color: $md-ref-primary-10 !important;
+//         }
+//     }
+
+//     @media screen and (max-width: 1025px) {
+//         .navbar-menu {
+//             position: absolute;
+//             top: 0;
+//             width: 100%;
+//             height: 100vh !important;
+//             background: $md-white;
+//             padding-top: 4rem;
+
+//             transition: 1s;
+//             transform: translateX(-100%);
+
+//             display: block;
+
+//             &.is-active {
+//                 transform: translateX(0) !important;
+//             }
+
+//             z-index: -1;
+
+//             .navbar-end {
+//                 position: absolute;
+//                 bottom: 40%;
+//                 padding-bottom: 1rem;
+//             }
+//         }
+//     }
+// }

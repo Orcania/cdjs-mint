@@ -1,7 +1,7 @@
 import { getLayout as getPageTitleLayout } from 'src/layouts/page-title';
 import { getLayout as getMainLayout } from 'src/layouts/main';
 
-const HomePage = () => {
+const MintPage = () => {
     return (
         <div style={{ height: '100vh' }}>
             <div className="hero is-primary">
@@ -15,6 +15,6 @@ const HomePage = () => {
     );
 };
 
-HomePage.getLayout = page => getPageTitleLayout(getMainLayout(page), 'Home');
+MintPage.getLayout = page => getPageTitleLayout(getMainLayout(page), 'Mint');
 
-export default HomePage;        
+export default MintPage;        
