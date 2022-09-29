@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useCelesteSelector, ConnectedWrapper } from '@celeste-js/react';
 
-import { open_modal } from 'src/redux/actions/modalActions';
+import { open_modal } from 'src/redux/actions';
 import modals from 'src/static/app.modals';
 
 const getAddressReduced = address => `${address.slice(0, 6)}...${address.slice(-4)}`;
@@ -36,10 +36,10 @@ const Navbar = () => {
         handleHamburgerClick();
     };
 
-    // const handleOpenWalletAccountModal = () => {
-    //     dispatch(open_modal({ modalName: modals.walletAccountModal }));
-    //     handleHamburgerClick();
-    // };
+    const handleOpenWalletAccountModal = () => {
+        dispatch(open_modal({ modalName: modals.WALLETACCOUNT }));
+        handleHamburgerClick();
+    };
 
     // const handleOpenNetworksModal = () => {
     //     dispatch(open_modal({ modalName: modals.networksModal }));
@@ -122,7 +122,7 @@ const Navbar = () => {
                             <button
                                 className="button is-fullwidth is-hblue address-button is-rounded navbar-button"
                                 type="button"
-                                onClick={() => {}}
+                                onClick={handleOpenWalletAccountModal}
                             >
                                 {walletReducer.address && getAddressReduced(walletReducer.address)}
                             </button>

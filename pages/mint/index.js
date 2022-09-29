@@ -109,6 +109,7 @@ const MintPage = () => {
                         );
                     })}
                 </div>
+                <hr />
             </div>
         </div>
     );

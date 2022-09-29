@@ -3,6 +3,7 @@
 $hpurple: #bf9dff;
 $hblue: #04378c;
 $hdark: #1c1c1c;
+$hwhite: #ffffff;
 
 $hgra1: linear-gradient(90deg, $hpurple 0%, $hblue 100%);
 
@@ -10,6 +11,7 @@ $hcolors: (
     hpurple: $hpurple,
     hblue: $hblue,
     hdark: $hdark,
+    hwhite: $hwhite,
 );
 
 $hgras: (

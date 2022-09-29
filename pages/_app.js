@@ -6,6 +6,7 @@ import Script from 'next/script';
 import { Provider } from 'react-redux';
 
 import WalletsModal from 'src/components/commons/modal/wallets-modal';
+import WalletAccountModal from 'src/components/commons/modal/wallet-account-modal';
 
 import { ToastContainer } from 'react-toastify';
 
@@ -35,6 +36,7 @@ function MyApp({ Component, pageProps }) {
 
                 <Provider store={store}>
                     <WalletsModal />
+                    <WalletAccountModal />
                     {getLayout(<Component {...pageProps} />)}
                 </Provider>
             </CelesteProvider>
