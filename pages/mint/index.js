@@ -1,126 +1,110 @@
+import { useEffect, useState } from 'react';
+
 import { getLayout as getPageTitleLayout } from 'src/layouts/page-title';
 import { getLayout as getMainLayout } from 'src/layouts/main';
 
-import { Card } from 'primereact/card';
-import { Button } from 'primereact/button';
+import Mintcard from 'src/components/commons/internal/mint-card';
 
-import useCountdown from 'src/hooks/useCountdown';
+import MintProxy from 'src/sc-proxies/mint';
 
-const mintData = [
+import { mintType2MethodName as mintTypes } from 'src/static/constants';
+import { useCelesteSelector } from '@celeste-js/react';
+
+const mintDataStruct = {
+    active: false,
+    price: '',
+    userMintLimit: '',
+    userMints: '',
+};
+
+const mintDataBase = [
     {
         id: 1,
         title: 'VIP List',
-        premint_date: 'Oct. 2nd, 2022 @ 3:00PM UTC',
-        date_timestamp: 1633120000,
-        price: 0.1,
-        mint_limit: 1,
+        premintDate: 'Oct. 2nd, 2022 @ 3:00PM UTC',
+        dateTimestamp: 1664722800000,
     },
     {
         id: 2,
         title: 'Guest List',
-        premint_date: 'TBA',
-        date_timestamp: null,
-        price: 0.2,
-        mint_limit: 2,
+        premintDate: 'TBA',
+        dateTimestamp: null,
     },
     {
         id: 3,
         title: 'Public',
-        premint_date: 'TBA',
-        date_timestamp: null,
-        price: 0.3,
-        mint_limit: 3,
+        premintDate: 'TBA',
+        dateTimestamp: null,
     },
 ];
 
-const Mintcard = ({ title, premint_date, date_timestamp, price, mint_limit }) => {
-    return (
-        <Card title={title} style={{ width: '90%' }} className="mint_card">
-            <div className="has-text-centered">
-                <p>
-                    <b>
-                        Pre-mint Opening Date and Time: <br />
-                        {premint_date}
-                    </b>
-                </p>
-                <br />
-                <h2>
-                    <b>Countdown:</b>
-                </h2>
-                <div>
-                    {date_timestamp ? (
-                        <h1 className="subtitale is-6 mb-0">
-                            <span>DD</span>
-                            {' : '}
-                            <span>HH</span>
-                            {' : '}
-                            <span>MM</span>
-                            {' : '}
-                            <span>SS</span>
-                        </h1>
-                    ) : (
-                        <h1 className="subtitale is-6 mb-0">— : — : — : —</h1>
-                    )}
-
-                    <h1 className="subtitle is-6">
-                        <span>DD</span>
-                        {' : '}
-                        <span>HH</span>
-                        {' : '}
-                        <span>MM</span>
-                        {' : '}
-                        <span>SS</span>
-                    </h1>
-                </div>
-                <br />
-                <div>
-                    <span>Price: </span>
-                    <span>
-                        <b>{price} ETH</b>
-                    </span>
-                </div>
-
-                <div>
-                    <span>Mint Limit: </span>
-                    <span>
-                        <b>{mint_limit}</b>
-                    </span>
-                </div>
-            </div>
-        </Card>
-    );
-};
-
 const MintPage = () => {
-    const header = (
-        <img
-            alt="Card"
-            src="images/usercard.png"
-            onError={e => (e.target.src = 'https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png')}
-        />
-    );
+    const { web3Reducer } = useCelesteSelector(state => state);
 
-    const footer = (
-        <span>
-            <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" icon="pi pi-times" className="p-button-secondary ml-2" />
-        </span>
-    );
+    const [mintDataState, setMintDataState] = useState({
+        wl: {
+            ...mintDataBase[0],
+            ...mintDataStruct,
+        },
+        gl: {
+            ...mintDataBase[1],
+            ...mintDataStruct,
+        },
+        pm: {
+            ...mintDataBase[2],
+            ...mintDataStruct,
+        },
+    });
+
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (!web3Reducer.readonly_initialized) return;
+
+        (async () => {
+            setLoading(true);
+
+            const mintProxy = new MintProxy();
+
+            const mintRead = mintProxy.read();
+
+            const wlDataRes = await mintRead.mintData(mintTypes.wl);
+            const glDataRes = await mintRead.mintData(mintTypes.gl);
+            const pubDataRes = await mintRead.mintData(mintTypes.pm);
+
+            const wlData = {
+                ...mintDataBase[0],
+                ...wlDataRes,
+            };
+
+            const glData = {
+                ...mintDataBase[1],
+                ...glDataRes,
+            };
+
+            const pubData = {
+                ...mintDataBase[2],
+                ...pubDataRes,
+            };
+
+            setMintDataState({
+                wl: wlData,
+                gl: glData,
+                pm: pubData,
+            });
+
+            setLoading(false);
+        })();
+    }, [web3Reducer.readonly_initialized]);
 
     return (
         <div className="has-bg-hdark-o-9" style={{ minHeight: '100vh', padding: '100px' }}>
             <div className="container">
                 <div className="columns">
-                    {mintData.map(item => {
+                    {Object.keys(mintDataState).map(key => {
                         return (
-                            <div className="column">
-                                <Mintcard
-                                    title={item.title}
-                                    premint_date={item.premint_date}
-                                    date_timestamp={item.date_timestamp}
-                                    price={item.price}
-                                    mint_limit={item.mint_limit}
-                                />
+                            <div key={key} className="column is-4">
+                                <Mintcard mintData={mintDataState[key]} loading={loading} />
                             </div>
                         );
                     })}

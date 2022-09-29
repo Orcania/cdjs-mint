@@ -11,7 +11,7 @@ module.exports = {
         return [
             {
                 source: '/',
-                destination: '/home',
+                destination: '/mint',
                 permanent: false,
             },
         ];
