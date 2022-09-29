@@ -2,12 +2,14 @@
 /* eslint-disable jsx-a11y/interactive-supports-focus */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { useCelesteSelector, ConnectedWrapper } from '@celeste-js/react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useCelesteSelector, ConnectedWrapper } from '@celeste-js/react';
+
+import { open_modal } from 'src/redux/actions/modalActions';
+import modals from 'src/static/app.modals';
 
 const getAddressReduced = address => `${address.slice(0, 6)}...${address.slice(-4)}`;
 
@@ -18,7 +20,7 @@ const Navbar = () => {
     const [bgColor, setBgColor] = useState(false);
     const [scrollingDown, setScrollingDown] = useState(false);
 
-    // const { walletReducer } = useCelesteSelector(state => state);
+    const { walletReducer } = useCelesteSelector(state => state);
     // const { globalReducer } = useSelector(state => state);
     const dispatch = useDispatch();
 
@@ -29,10 +31,10 @@ const Navbar = () => {
         setMobileActive(newValue);
     };
 
-    // const handleOpenWalletsModal = () => {
-    //     dispatch(open_modal({ modalName: modals.walletsModal }));
-    //     handleHamburgerClick();
-    // };
+    const handleOpenWalletsModal = () => {
+        dispatch(open_modal({ modalName: modals.WALLETSMODAL }));
+        handleHamburgerClick();
+    };
 
     // const handleOpenWalletAccountModal = () => {
     //     dispatch(open_modal({ modalName: modals.walletAccountModal }));
@@ -109,7 +111,7 @@ const Navbar = () => {
                                     id="connect-button"
                                     className="button is-fullwidth is-rounded is-hblue has-background-hpink-o-2 has-border-2-hpink-o-10 is-shadowless navbar-button"
                                     type="button"
-                                    onClick={() => {}}
+                                    onClick={handleOpenWalletsModal}
                                 >
                                     Connect Wallet
                                 </button>
@@ -118,11 +120,11 @@ const Navbar = () => {
                     >
                         <div className="navbar-item">
                             <button
-                                className="button is-fullwidth address-button is-rounded navbar-button"
+                                className="button is-fullwidth is-hblue address-button is-rounded navbar-button"
                                 type="button"
                                 onClick={() => {}}
                             >
-                                {/* {walletReducer.address && getAddressReduced(walletReducer.address)} */}
+                                {walletReducer.address && getAddressReduced(walletReducer.address)}
                             </button>
                         </div>
                     </ConnectedWrapper>

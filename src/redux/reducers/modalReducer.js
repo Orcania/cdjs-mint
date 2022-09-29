@@ -1,4 +1,5 @@
-import { OPEN_MODAL, PLAY_CLOSE_ANIMATION, CLOSE_MODAL } from '../constants';
+import modals from 'src/static/app.modals';
+import { OPEN_MODAL, CLOSE_MODAL } from '../constants';
 
 const defaultModaStructure = {
     isOpen: false,
@@ -8,8 +9,11 @@ const defaultModaStructure = {
 const defaultState = {
     exampleModal: { ...defaultModaStructure },
     currentModal: '',
-    animation: '',
 };
+
+Object.values(modals).forEach(modal => {
+    defaultState[modal] = { ...defaultModaStructure };
+});
 
 // eslint-disable-next-line default-param-last
 const reducer = (state = defaultState, action) => {
@@ -19,13 +23,6 @@ const reducer = (state = defaultState, action) => {
                 ...state,
                 [action.payload.modalName]: { isOpen: true, data: action.payload.data },
                 currentModal: action.payload.modalName,
-                animation: 'open',
-            };
-
-        case PLAY_CLOSE_ANIMATION:
-            return {
-                ...state,
-                animation: 'close',
             };
 
         case CLOSE_MODAL:

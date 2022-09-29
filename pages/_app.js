@@ -5,6 +5,8 @@ import Script from 'next/script';
 
 import { Provider } from 'react-redux';
 
+import WalletsModal from 'src/components/commons/modal/wallets-modal';
+
 import { ToastContainer } from 'react-toastify';
 
 import store from 'src/redux/store';
@@ -26,12 +28,13 @@ function MyApp({ Component, pageProps }) {
                 <title>{appName}</title>
                 <meta name="description" content={appConfig.description} />
             </Head>
+            <Script src={`https://kit.fontawesome.com/${FONT_AWESOME_KEY}.js`} />
 
             <CelesteProvider>
                 <ToastContainer />
 
                 <Provider store={store}>
-                    <Script src={`https://kit.fontawesome.com/${FONT_AWESOME_KEY}.js`} />
+                    <WalletsModal />
                     {getLayout(<Component {...pageProps} />)}
                 </Provider>
             </CelesteProvider>
