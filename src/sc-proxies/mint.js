@@ -18,8 +18,8 @@ class MintProxy {
 
     read() {
         return {
-            mintData: async (type, address = null) => {
-                const result = await this.#contractRead.methods[type](address || addressBook.ZERO).call();
+            mintData: async (type, address) => {
+                const result = await this.#contractRead.methods[type](address).call();
                 return result;
             },
         };

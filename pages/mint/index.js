@@ -9,6 +9,7 @@ import MintProxy from 'src/sc-proxies/mint';
 
 import { mintType2MethodName as mintTypes } from 'src/static/constants';
 import { useCelesteSelector } from '@celeste-js/react';
+import { addressBook } from 'celeste.config';
 
 const mintDataStruct = {
     active: false,
@@ -23,18 +24,24 @@ const mintDataBase = [
         title: 'VIP List',
         premintDate: 'Oct. 2nd, 2022 @ 3:00PM UTC',
         dateTimestamp: 1664722800000,
+        price: 2,
+        userMintLimit: 15,
     },
     {
         id: 2,
         title: 'Guest List',
         premintDate: 'TBA',
         dateTimestamp: null,
+        price: 1,
+        userMintLimit: 10,
     },
     {
         id: 3,
         title: 'Public',
         premintDate: 'TBA',
         dateTimestamp: null,
+        price: 3,
+        userMintLimit: 20,
     },
 ];
 
@@ -42,11 +49,11 @@ const MintPage = () => {
     const { web3Reducer, walletReducer } = useCelesteSelector(state => state);
 
     const [mintDataState, setMintDataState] = useState({
-        wl: {
+        gl: {
             ...mintDataBase[0],
             ...mintDataStruct,
         },
-        gl: {
+        wl: {
             ...mintDataBase[1],
             ...mintDataStruct,
         },
@@ -56,28 +63,38 @@ const MintPage = () => {
         },
     });
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [triggerVar, setTriggerVar] = useState(0);
+    const [fetching, setFetching] = useState(false);
+
+    const onMintCallback = () => {
+        setTriggerVar(triggerVar + 1);
+    };
 
     const fetchMintData = async () => {
+        // wait until fetching is done before executing code below
+
         setLoading(true);
+        setFetching(true);
 
         const mintProxy = new MintProxy();
 
         const mintRead = mintProxy.read();
 
-        const wlDataRes = await mintRead.mintData(mintTypes.wl, walletReducer.address);
+        const address = walletReducer.isLoggedIn ? walletReducer.address : addressBook.ZERO;
 
-        const glDataRes = await mintRead.mintData(mintTypes.gl, walletReducer.address);
-        const pubDataRes = await mintRead.mintData(mintTypes.pm, walletReducer.address);
-
-        const wlData = {
-            ...mintDataBase[0],
-            ...wlDataRes,
-        };
+        const glDataRes = await mintRead.mintData(mintTypes.gl, address);
+        const wlDataRes = await mintRead.mintData(mintTypes.wl, address);
+        const pubDataRes = await mintRead.mintData(mintTypes.pm, address);
 
         const glData = {
-            ...mintDataBase[1],
+            ...mintDataBase[0],
             ...glDataRes,
+        };
+
+        const wlData = {
+            ...mintDataBase[1],
+            ...wlDataRes,
         };
 
         const pubData = {
@@ -86,22 +103,30 @@ const MintPage = () => {
         };
 
         setMintDataState({
-            wl: wlData,
             gl: glData,
+            wl: wlData,
             pm: pubData,
         });
 
         setLoading(false);
+        setFetching(false);
     };
 
-    useEffect(() => {
-        if (!web3Reducer.readonly_initialized) return;
+    // wait until a fetch request is made before fetching data again
 
-        (async () => {
-            await fetchMintData();
-        })();
+    useEffect(() => {
+        if (!web3Reducer.initialized || walletReducer.address === null) return;
+
+        if (fetching) {
+            setTimeout(() => {
+                setTriggerVar(triggerVar + 1);
+            }, 200);
+            return;
+        }
+
+        fetchMintData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [web3Reducer.readonly_initialized, walletReducer.address]);
+    }, [web3Reducer.initialized, walletReducer.address, triggerVar]);
 
     return (
         <div className="has-bg-hdark-o-9" style={{ minHeight: '100vh', padding: '100px' }}>
@@ -114,7 +139,7 @@ const MintPage = () => {
                                     mintData={mintDataState[key]}
                                     loading={loading}
                                     mintType={key}
-                                    onMint={fetchMintData}
+                                    onMint={onMintCallback}
                                 />
                             </div>
                         );
