@@ -5,8 +5,8 @@ import Script from 'next/script';
 
 import { Provider } from 'react-redux';
 
-import WalletsModal from 'src/components/commons/modal/wallets-modal';
-import WalletAccountModal from 'src/components/commons/modal/wallet-account-modal';
+import WalletsModal from 'src/components/modals/wallets-modal';
+import WalletAccountModal from 'src/components/modals/wallet-account-modal';
 
 import { ToastContainer } from 'react-toastify';
 

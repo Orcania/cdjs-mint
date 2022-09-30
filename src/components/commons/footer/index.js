@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 const socialMedia = [
     {
         id: 1,
@@ -26,7 +27,7 @@ const Footer = () => {
                 <div className="containear">
                     <div className="columns is-vcentered">
                         <div className="column">
-                            <img src="./media/logo.png" width="150" />
+                            <img src="./media/logo.png" width="150" alt="" />
                         </div>
                         <div className="column">
                             <h1 className="subtitle has-text-white is-6">

@@ -100,6 +100,7 @@ const MintPage = () => {
         (async () => {
             await fetchMintData();
         })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [web3Reducer.readonly_initialized, walletReducer.address]);
 
     return (

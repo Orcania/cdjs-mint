@@ -5,13 +5,11 @@ import { toast } from 'react-toastify';
 
 import { Dialog } from 'primereact/dialog';
 
-import Modal from 'src/components/commons/modal';
-
 import modals from 'src/static/app.modals';
 
 import { open_modal, close_modal } from 'src/redux/actions';
 
-import { errorNotification } from 'src/static/notifications';
+// import { errorNotification } from 'src/static/notifications';
 
 import { BigNum2NormalNum } from 'src/utils';
 import { rpcs } from 'celeste.config';
@@ -23,7 +21,6 @@ const WalletAccountModal = () => {
 
     const dispatch = useDispatch();
     const walletAccountModal = useSelector(state => state.modalReducer[modals.WALLETACCOUNT]);
-    const { globalReducer } = useSelector(state => state);
 
     const { web3Reducer, walletReducer } = useCelesteSelector(state => state);
 

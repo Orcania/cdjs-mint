@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @next/next/no-img-element */
 import { ConnectButton } from '@celeste-js/react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,8 +11,6 @@ import { Dialog } from 'primereact/dialog';
 import wallets from 'src/static/wallets-list';
 
 import modals from 'src/static/app.modals';
-
-import styles from './styles.module.scss';
 
 const WalletsModal = () => {
     // app state

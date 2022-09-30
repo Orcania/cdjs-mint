@@ -5,7 +5,7 @@
 import Link from 'next/link';
 
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useCelesteSelector, ConnectedWrapper } from '@celeste-js/react';
 
 import { open_modal } from 'src/redux/actions';
@@ -74,7 +74,7 @@ const Navbar = () => {
             <div className="navbar-brand  py-2">
                 <Link href="/home">
                     <a className="navbar-item" onClick={handleNavbarItemClick} role="button">
-                        <img src="./media/logo.png" width="120" />
+                        <img src="./media/logo.png" width="120" alt="" />
                     </a>
                 </Link>
 
