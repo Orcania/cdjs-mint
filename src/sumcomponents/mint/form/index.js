@@ -57,7 +57,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
         if (!web3Reducer.initialized || !walletReducer.address === null) return;
         if (!list) return;
 
-        const listed = list.includes(walletReducer.address);
+        const listed = list.find(adrs => adrs.toLowerCase() === walletReducer.address.toLowerCase());
 
         setUserListed(listed);
 

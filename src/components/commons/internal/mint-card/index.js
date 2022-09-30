@@ -15,7 +15,7 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
         <>
             <Card
                 title={mintData.title}
-                style={{ width: '90%' }}
+                style={{ width: '100%' }}
                 className={`mint_card ${mintData.active ? '' : 'no-active'}`}
             >
                 {mintData.active && mintData.dateTimestamp && live ? (
@@ -93,6 +93,7 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
                     )}
                 </div>
             </Card>
+            <hr />
             <br />
 
             <MintForm

@@ -9,33 +9,36 @@ const fetchTime = async () => {
 const useCountdown = unixMilliseconds => {
     const [timeLeft, setTimeLeft] = useState({});
     const [done, setDone] = useState(false);
+    const [initialFetchedTime, setInitialFetchedTime] = useState(0);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            fetchTime().then(now => {
-                const distance = unixMilliseconds - now;
+        const interval = setInterval(async () => {
+            const now = initialFetchedTime === 0 ? await fetchTime() : initialFetchedTime + 1000;
+            setInitialFetchedTime(now);
 
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            const distance = unixMilliseconds - now;
 
-                // check if done
-                if (distance < 0) {
-                    setDone(true);
-                    clearInterval(interval);
-                }
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                setTimeLeft({
-                    D: days,
-                    H: hours,
-                    M: minutes,
-                    S: seconds,
-                });
+            // check if done
+            if (distance < 0) {
+                setDone(true);
+                clearInterval(interval);
+            }
+
+            setTimeLeft({
+                D: days,
+                H: hours,
+                M: minutes,
+                S: seconds,
             });
         }, 1000);
 
         return () => clearInterval(interval);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [unixMilliseconds]);
 
     return [timeLeft, done];

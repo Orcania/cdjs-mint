@@ -29,7 +29,7 @@ const mintDataBase = [
         title: 'VIP List',
         premintDate: 'Oct. 2nd, 2022 @ 3:00PM UTC',
         // dateTimestamp: 1664722800000,
-        dateTimestamp: 1664567410000,
+        dateTimestamp: 1664570707000,
         price: 2,
         userMintLimit: 15,
         list: gl,
@@ -139,9 +139,9 @@ const MintPage = () => {
     }, [web3Reducer.initialized, walletReducer.address, triggerVar]);
 
     return (
-        <div className="has-bg-hdark-o-9" style={{ minHeight: '100vh', padding: '100px' }}>
+        <div className="has-bg-hdark-o-9" style={{ minHeight: '100vh', padding: '100px 2rem' }}>
             <div className="container">
-                <div className="columns">
+                <div className="columns is-variable is-5">
                     {Object.keys(mintDataState).map(key => {
                         return (
                             <div key={key} className="column is-4">
@@ -155,7 +155,6 @@ const MintPage = () => {
                         );
                     })}
                 </div>
-                <hr />
             </div>
         </div>
     );

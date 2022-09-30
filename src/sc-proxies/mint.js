@@ -1,6 +1,5 @@
 /* eslint-disable lines-between-class-members */
 import { store as celesteStore } from '@celeste-js/store';
-import { addressBook } from 'celeste.config';
 
 import BigNumber from 'bignumber.js';
 
