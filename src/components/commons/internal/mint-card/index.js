@@ -1,5 +1,6 @@
 import { Card } from 'primereact/card';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { Tag } from 'primereact/tag';
 
 import { BigNum2NormalNum } from 'src/utils';
 
@@ -9,10 +10,17 @@ import MintForm from 'src/sumcomponents/mint/form';
 import { ConnectedWrapper, NetworkWrapper } from '@celeste-js/react';
 
 const Mintcard = ({ mintData, loading, mintType, onMint }) => {
-    const timeLeft = useCountdown(mintData.dateTimestamp || 0);
+    const [timeLeft, live] = useCountdown(mintData.dateTimestamp || 0);
     return (
         <>
-            <Card title={mintData.title} style={{ width: '90%' }} className="mint_card">
+            <Card
+                title={mintData.title}
+                style={{ width: '90%' }}
+                className={`mint_card ${mintData.active ? '' : 'no-active'}`}
+            >
+                {mintData.active && mintData.dateTimestamp && live ? (
+                    <Tag severity="success" value="Live" className="live_tagg" />
+                ) : null}
                 <div className="has-text-centered">
                     <p>
                         <b>
@@ -21,11 +29,12 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
                         </b>
                     </p>
                     <br />
+
                     <h2>
                         <b>Countdown:</b>
                     </h2>
                     <div>
-                        {mintData.dateTimestamp ? (
+                        {mintData.dateTimestamp && !live ? (
                             <h1 className=" has-text-danger mb-0">
                                 <b>
                                     <span>{timeLeft.D}</span>
@@ -41,7 +50,7 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
                             <h1 className="subtitale is-6 mb-0">— : — : — : —</h1>
                         )}
 
-                        <h1 className="subtitle is-6">
+                        <h1 className="subtiatle is-6">
                             <span>D</span>
                             {' : '}
                             <span>H</span>
@@ -59,7 +68,7 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
                             <div>
                                 <span>Price: </span>
                                 <span>
-                                    <b>{BigNum2NormalNum(mintData.price)} ETH</b>
+                                    <b>{mintData.price === null ? 'TBA' : `${BigNum2NormalNum(mintData.price)} ETH`}</b>
                                 </span>
                             </div>
 
@@ -85,12 +94,16 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
                 </div>
             </Card>
             <br />
+
             <MintForm
                 userMintLimit={+mintData.userMintLimit}
                 price={mintData.price}
                 userMints={+mintData.userMints}
                 mintType={mintType}
                 onMint={onMint}
+                active={mintData.active}
+                mintDate={mintData.dateTimestamp}
+                list={mintData.list}
             />
         </>
     );

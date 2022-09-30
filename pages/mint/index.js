@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { useCelesteSelector } from '@celeste-js/react';
+
+import { addressBook } from 'celeste.config';
 
 import { getLayout as getPageTitleLayout } from 'src/layouts/page-title';
 import { getLayout as getMainLayout } from 'src/layouts/main';
@@ -8,8 +11,10 @@ import Mintcard from 'src/components/commons/internal/mint-card';
 import MintProxy from 'src/sc-proxies/mint';
 
 import { mintType2MethodName as mintTypes } from 'src/static/constants';
-import { useCelesteSelector } from '@celeste-js/react';
-import { addressBook } from 'celeste.config';
+
+import mintLists from 'src/static/mint-lists';
+
+const { gl, wl } = mintLists;
 
 const mintDataStruct = {
     active: false,
@@ -23,9 +28,11 @@ const mintDataBase = [
         id: 1,
         title: 'VIP List',
         premintDate: 'Oct. 2nd, 2022 @ 3:00PM UTC',
-        dateTimestamp: 1664722800000,
+        // dateTimestamp: 1664722800000,
+        dateTimestamp: 1664567410000,
         price: 2,
         userMintLimit: 15,
+        list: gl,
     },
     {
         id: 2,
@@ -34,6 +41,7 @@ const mintDataBase = [
         dateTimestamp: null,
         price: 1,
         userMintLimit: 10,
+        list: wl,
     },
     {
         id: 3,
@@ -95,11 +103,13 @@ const MintPage = () => {
         const wlData = {
             ...mintDataBase[1],
             ...wlDataRes,
+            price: wlDataRes.active ? wlDataRes.price : null,
         };
 
         const pubData = {
             ...mintDataBase[2],
             ...pubDataRes,
+            price: pubDataRes.active ? pubDataRes.price : null,
         };
 
         setMintDataState({

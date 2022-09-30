@@ -1,0 +1,23 @@
+.mint_card {
+    position: relative;
+    .p-card-body {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        .p-card-title {
+            text-align: center !important;
+        }
+    }
+
+    &.no-active {
+        background: grey;
+        user-select: none;
+        color: rgba(white, 0.75) !important;
+    }
+}
+
+.live_tagg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
+}
