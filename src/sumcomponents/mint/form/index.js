@@ -184,7 +184,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                 </>
                             ) : (
                                 <h1 className="title is-6 has-text-white has-text-centered">
-                                    You are not in the list sorry.
+                                    You are not on the Whitelist, sorry
                                 </h1>
                             )}
                         </NetworkWrapper>

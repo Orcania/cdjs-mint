@@ -29,7 +29,7 @@ const mintDataBase = [
         title: 'VIP List',
         premintDate: 'Oct. 2nd, 2022 @ 3:00PM UTC',
         // dateTimestamp: 1664722800000,
-        dateTimestamp: 1664570707000,
+        dateTimestamp: 1664571307000,
         price: 2,
         userMintLimit: 15,
         list: gl,
