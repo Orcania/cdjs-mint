@@ -7,27 +7,55 @@ import MintProxy from 'src/sc-proxies/mint';
 import { open_modal } from 'src/redux/actions';
 import modals from 'src/static/app.modals';
 import { toast } from 'react-toastify';
+import { rpcs } from 'celeste.config';
 
-const MintForm = ({ userMintLimit, price }) => {
+const MintForm = ({ userMintLimit, price, userMints, onMint }) => {
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(false);
 
     const { walletReducer } = useCelesteSelector(state => state);
 
     const [mintAmount, setMintAmount] = useState(1);
 
-    const handleDecrease = () => {};
+    const handleDecrease = () => {
+        if (mintAmount > 1) setMintAmount(mintAmount - 1);
+    };
 
-    const handleIncrease = () => {};
+    const handleIncrease = () => {
+        if (mintAmount < userMintLimit || mintAmount + userMints <= userMintLimit) setMintAmount(mintAmount + 1);
+    };
 
-    const handleMintClick = async e => {
+    const handleMintClick = async () => {
         const mintProxy = new MintProxy().write();
 
+        setLoading(true);
         try {
-            const tx = await mintProxy.mint({ type: 'pmMint', amount: 1, price }, { from: walletReducer.address });
+            const tx = await mintProxy.mint({ type: 'wlMint', amount: 1, price }, { from: walletReducer.address });
+            const txnHash = tx.transactionHash;
+
+            const toastContent = () => (
+                <div>
+                    <p>
+                        Txs successfull{' '}
+                        <a href={`${rpcs.ETH.explorer}/tx/${txnHash}`} target="_blank" rel="noreferrer">
+                            View on Etherscan
+                        </a>
+                    </p>
+                </div>
+            );
+
+            onMint();
+
+            toast.success(toastContent, {
+                closeOnClick: false,
+                pauseOnHover: true,
+            });
         } catch (err) {
             toast.error('Something went wrong while trying to mint your NFT. Please try again.');
+            // eslint-disable-next-line no-console
             console.log(err);
         }
+        setLoading(false);
     };
 
     const handleOpenWalletsModal = () => {
@@ -47,7 +75,12 @@ const MintForm = ({ userMintLimit, price }) => {
 
                     <div className="field">
                         <div className="mint_buttons has-text-centered">
-                            <button className="mint_button button is-hblue mx-1" type="button">
+                            <button
+                                className="mint_button button is-hblue mx-1"
+                                type="button"
+                                disabled={mintAmount === 1}
+                                onClick={handleDecrease}
+                            >
                                 -
                             </button>
                             <input
@@ -55,7 +88,12 @@ const MintForm = ({ userMintLimit, price }) => {
                                 value={mintAmount}
                                 style={{ width: '100px' }}
                             />
-                            <button className="mint_button button is-hblue mx-1" type="button">
+                            <button
+                                className="mint_button button is-hblue mx-1"
+                                type="button"
+                                disabled={mintAmount + userMints >= userMintLimit}
+                                onClick={handleIncrease}
+                            >
                                 +
                             </button>
                         </div>
@@ -88,17 +126,18 @@ const MintForm = ({ userMintLimit, price }) => {
                                             className="button is-fullwidth is-hblue"
                                             type="button"
                                             style={{ width: '200px' }}
-                                            onErrorCB={console.log}
+                                            onErrorCB={() => {}}
                                         >
                                             Change to ETH chain
                                         </SwitchNetworkButton>
                                     }
                                 >
                                     <button
-                                        className="button is-fullwidth is-hblue"
+                                        className={`button is-fullwidth is-hblue ${loading ? 'is-loading' : ''}`}
                                         type="button"
                                         style={{ width: '200px' }}
                                         onClick={handleMintClick}
+                                        // disabled={userMints >= userMintLimit}
                                     >
                                         Mint
                                     </button>

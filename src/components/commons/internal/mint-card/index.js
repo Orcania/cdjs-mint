@@ -8,7 +8,7 @@ import useCountdown from 'src/hooks/useCountdown';
 import MintForm from 'src/sumcomponents/mint/form';
 import { ConnectedWrapper, NetworkWrapper } from '@celeste-js/react';
 
-const Mintcard = ({ mintData, loading }) => {
+const Mintcard = ({ mintData, loading, mintType, onMint }) => {
     const timeLeft = useCountdown(mintData.dateTimestamp || 0);
     return (
         <>
@@ -85,7 +85,13 @@ const Mintcard = ({ mintData, loading }) => {
                 </div>
             </Card>
             <br />
-            <MintForm userMintLimit={mintData.userMintLimit} price={mintData.price} />
+            <MintForm
+                userMintLimit={+mintData.userMintLimit}
+                price={mintData.price}
+                userMints={+mintData.userMints}
+                mintType={mintType}
+                onMint={onMint}
+            />
         </>
     );
 };

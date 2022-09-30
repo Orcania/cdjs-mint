@@ -39,7 +39,7 @@ const mintDataBase = [
 ];
 
 const MintPage = () => {
-    const { web3Reducer } = useCelesteSelector(state => state);
+    const { web3Reducer, walletReducer } = useCelesteSelector(state => state);
 
     const [mintDataState, setMintDataState] = useState({
         wl: {
@@ -58,44 +58,49 @@ const MintPage = () => {
 
     const [loading, setLoading] = useState(true);
 
+    const fetchMintData = async () => {
+        setLoading(true);
+
+        const mintProxy = new MintProxy();
+
+        const mintRead = mintProxy.read();
+
+        const wlDataRes = await mintRead.mintData(mintTypes.wl, walletReducer.address);
+
+        const glDataRes = await mintRead.mintData(mintTypes.gl, walletReducer.address);
+        const pubDataRes = await mintRead.mintData(mintTypes.pm, walletReducer.address);
+
+        const wlData = {
+            ...mintDataBase[0],
+            ...wlDataRes,
+        };
+
+        const glData = {
+            ...mintDataBase[1],
+            ...glDataRes,
+        };
+
+        const pubData = {
+            ...mintDataBase[2],
+            ...pubDataRes,
+        };
+
+        setMintDataState({
+            wl: wlData,
+            gl: glData,
+            pm: pubData,
+        });
+
+        setLoading(false);
+    };
+
     useEffect(() => {
         if (!web3Reducer.readonly_initialized) return;
 
         (async () => {
-            setLoading(true);
-
-            const mintProxy = new MintProxy();
-
-            const mintRead = mintProxy.read();
-
-            const wlDataRes = await mintRead.mintData(mintTypes.wl);
-            const glDataRes = await mintRead.mintData(mintTypes.gl);
-            const pubDataRes = await mintRead.mintData(mintTypes.pm);
-
-            const wlData = {
-                ...mintDataBase[0],
-                ...wlDataRes,
-            };
-
-            const glData = {
-                ...mintDataBase[1],
-                ...glDataRes,
-            };
-
-            const pubData = {
-                ...mintDataBase[2],
-                ...pubDataRes,
-            };
-
-            setMintDataState({
-                wl: wlData,
-                gl: glData,
-                pm: pubData,
-            });
-
-            setLoading(false);
+            await fetchMintData();
         })();
-    }, [web3Reducer.readonly_initialized]);
+    }, [web3Reducer.readonly_initialized, walletReducer.address]);
 
     return (
         <div className="has-bg-hdark-o-9" style={{ minHeight: '100vh', padding: '100px' }}>
@@ -104,7 +109,12 @@ const MintPage = () => {
                     {Object.keys(mintDataState).map(key => {
                         return (
                             <div key={key} className="column is-4">
-                                <Mintcard mintData={mintDataState[key]} loading={loading} />
+                                <Mintcard
+                                    mintData={mintDataState[key]}
+                                    loading={loading}
+                                    mintType={key}
+                                    onMint={fetchMintData}
+                                />
                             </div>
                         );
                     })}
