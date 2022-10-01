@@ -40,7 +40,7 @@ $corners: 'top', 'right', 'bottom', 'left';
     .button.is-#{$colorName} {
         background: $color !important;
         border-color: $color !important;
-        color: white !important;
+        color: white;
 
         &:hover:enabled {
             background-color: lighten($color, 10) !important;
@@ -61,7 +61,7 @@ $corners: 'top', 'right', 'bottom', 'left';
     .button.is-#{$colorName}.outlined {
         background-color: rgba($color, 0.25) !important;
         border-color: $color !important;
-        color: lighten($color, 10) !important;
+        color: lighten($color, 10);
 
         &:hover:enabled {
             background-color: $color !important;

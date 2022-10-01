@@ -75,8 +75,9 @@ const WalletAccountModal = () => {
             visible={walletAccountModal.isOpen}
             header="Account"
             onHide={handleCloseClick}
-            className="resize-manager has-bg-hdark"
+            className="resize-manager "
             draggable={false}
+            modal
         >
             <div>
                 {/* <div className={background} /> */}

@@ -150,7 +150,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                     <div className="field">
                                         <div className="mint_buttons has-text-centered">
                                             <button
-                                                className="mint_button button is-hblue mx-1"
+                                                className="mint_button button is-hdark outlined has-text-white mx-1"
                                                 type="button"
                                                 disabled={mintAmount === 1}
                                                 onClick={handleDecrease}
@@ -164,7 +164,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                                 onChange={handleInputChange}
                                             />
                                             <button
-                                                className="mint_button button is-hblue mx-1"
+                                                className="mint_button button is-hdark outlined has-text-white mx-1"
                                                 type="button"
                                                 disabled={mintAmount + userMints >= userMintLimit}
                                                 onClick={handleIncrease}
@@ -195,7 +195,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                             <ConnectedWrapper
                                 disconnectedComponent={
                                     <button
-                                        className="button is-fullwidth is-hblue"
+                                        className="button is-fullwidth is-hdark outlined has-text-white"
                                         type="button"
                                         style={{ width: '200px' }}
                                         onClick={handleOpenWalletsModal}
@@ -208,7 +208,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                     info={
                                         <SwitchNetworkButton
                                             chainId={4}
-                                            className="button is-fullwidth is-hblue"
+                                            className="button is-fullwidth is-hdark outlined has-text-white"
                                             type="button"
                                             style={{ width: '200px' }}
                                             onErrorCB={() => {}}
@@ -222,7 +222,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                             <div />
                                             {userMints >= userMintLimit ? (
                                                 <button
-                                                    className="button is-fullwidth is-hblue"
+                                                    className="button is-fullwidth is-hdark has-text-white"
                                                     type="button"
                                                     style={{ width: '200px' }}
                                                     disabled
@@ -231,7 +231,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                                 </button>
                                             ) : (
                                                 <button
-                                                    className={`button is-fullwidth is-hblue ${
+                                                    className={`button is-fullwidth is-hdark has-text-white ${
                                                         loading ? 'is-loading' : ''
                                                     }`}
                                                     type="button"

@@ -28,7 +28,7 @@ const mintDataBase = [
         id: 1,
         title: 'VIP List',
         premintDate: 'Oct. 2nd, 2022 @ 3:00PM UTC',
-        // dateTimestamp: 1664722800000,
+        dateTimestamp: 1664722800000,
         dateTimestamp: 1664571307000,
         price: 2,
         userMintLimit: 15,
@@ -139,7 +139,13 @@ const MintPage = () => {
     }, [web3Reducer.initialized, walletReducer.address, triggerVar]);
 
     return (
-        <div className="has-bg-hdark-o-9" style={{ minHeight: '100vh', padding: '100px 2rem' }}>
+        <div className="bg-mint" style={{ minHeight: '100vh', padding: '100px 2rem' }}>
+            {/* <video autoPlay muted loop id="mydiviivivividioe" className="bg-video">
+                <source
+                    src="https://uploads-ssl.webflow.com/622915b1c38ba539c4ab4bbe/62a66f959422e65c43e37c56_Cdjs-web-video-v5-transcode.mp4"
+                    type="video/mp4"
+                />
+            </video> */}
             <div className="container">
                 <div className="columns is-variable is-5">
                     {Object.keys(mintDataState).map(key => {

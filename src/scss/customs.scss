@@ -1,0 +1,14 @@
+.bg-video {
+    width: 100vw !important;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.bg-mint {
+    background-color: #08022c;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%2308022C' cx='50' cy='0' r='50'/%3E%3Cg fill='%23090c33' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%230a133b' cx='50' cy='100' r='50'/%3E%3Cg fill='%230d1943' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23111e4b' cx='50' cy='200' r='50'/%3E%3Cg fill='%23132453' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23162a5c' cx='50' cy='300' r='50'/%3E%3Cg fill='%23183064' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%231b366d' cx='50' cy='400' r='50'/%3E%3Cg fill='%231d3c76' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%231e427e' cx='50' cy='500' r='50'/%3E%3Cg fill='%23204987' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23204f90' cx='50' cy='600' r='50'/%3E%3Cg fill='%23215699' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23215da3' cx='50' cy='700' r='50'/%3E%3Cg fill='%232164ac' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23206bb5' cx='50' cy='800' r='50'/%3E%3Cg fill='%231e72bf' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%231b79c8' cx='50' cy='900' r='50'/%3E%3Cg fill='%231781d2' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%231188DB' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: contain;
+}

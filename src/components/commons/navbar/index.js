@@ -109,7 +109,7 @@ const Navbar = () => {
                             <div className="navbar-item">
                                 <button
                                     id="connect-button"
-                                    className="button is-fullwidth is-rounded is-hblue has-background-hpink-o-2 has-border-2-hpink-o-10 is-shadowless navbar-button"
+                                    className="button is-fullwidth is-rounded is-hblue has-background-hpink-o-2 has-border-2-hpink-o-10 is-shadowless navbar-button has-text-white"
                                     type="button"
                                     onClick={handleOpenWalletsModal}
                                 >
@@ -120,7 +120,7 @@ const Navbar = () => {
                     >
                         <div className="navbar-item">
                             <button
-                                className="button is-fullwidth is-hblue address-button is-rounded navbar-button"
+                                className="button is-fullwidth is-hblue address-button is-rounded navbar-button has-text-white"
                                 type="button"
                                 onClick={handleOpenWalletAccountModal}
                             >
