@@ -17,30 +17,30 @@ const mintName = {
     pm: 'Public',
 };
 
-const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, mintDate, list }) => {
+const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, mintDate }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
-    const { web3Reducer, walletReducer } = useCelesteSelector(state => state);
+    const { walletReducer } = useCelesteSelector(state => state);
 
     const [mintAmount, setMintAmount] = useState(1);
     const [totalPrice, setTotalPrice] = useState(+price);
-    const [userListed, setUserListed] = useState(mintType === 'pm');
+    const [userListed] = useState(true);
 
     // eslint-disable-next-line no-unused-vars
     const [_timeLeft, live] = useCountdown(mintDate);
 
-    useEffect(() => {
-        if (mintType === 'pm') return;
-        if (!web3Reducer.initialized || !walletReducer.address === null) return;
-        if (!list) return;
+    // useEffect(() => {
+    //     if (mintType === 'pm') return;
+    //     if (!web3Reducer.initialized || !walletReducer.address === null) return;
+    //     if (!list) return;
 
-        const listed = list.find(adrs => adrs.toLowerCase() === walletReducer.address.toLowerCase());
+    //     const listed = list.find(adrs => adrs.toLowerCase() === walletReducer.address.toLowerCase());
 
-        setUserListed(listed);
+    //     setUserListed(listed);
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [web3Reducer.initialized, walletReducer.address, mintType]);
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [web3Reducer.initialized, walletReducer.address, mintType]);
 
     const handleDecrease = () => {
         if (mintAmount > 1) setMintAmount(mintAmount - 1);
