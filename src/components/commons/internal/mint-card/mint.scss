@@ -3,6 +3,8 @@
     background: rgba($hdark, 0.9) !important;
     backdrop-filter: blur(10px);
 
+    border: 3px solid rgba(white, 0.5);
+
     color: rgba(white, 0.9) !important;
 
     .p-card-body {
@@ -16,7 +18,7 @@
     &.no-active {
         background: rgba($hdark, 0.75) !important;
         user-select: none;
-        color: rgba(white, 0.25) !important;
+        color: rgba(white, 0.5) !important;
     }
 }
 
@@ -25,4 +27,12 @@
     top: 0;
     right: 0;
     transform: translate(50%, -50%);
+}
+
+.pbar {
+    background-color: rgba($hdark, 0.8) !important;
+    border: 1px solid rgba(white, 0.5);
+    .p-progressbar-value {
+        background-color: rgba($hwhite, 0.5) !important;
+    }
 }

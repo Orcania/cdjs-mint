@@ -21,6 +21,14 @@ class MintProxy {
                 const result = await this.#contractRead.methods[type](address).call();
                 return result;
             },
+            maxSupply: async () => {
+                const result = await this.#contractRead.methods.maxSupply().call();
+                return result;
+            },
+            totalMints: async () => {
+                const result = await this.#contractRead.methods.totalMints().call();
+                return result;
+            },
         };
     }
 

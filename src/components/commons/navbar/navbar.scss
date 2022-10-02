@@ -3,6 +3,8 @@
 .custom-navbar {
     transition: 0.5s;
 
+    border-bottom: 1px solid $hblue;
+
     .navbar-menu {
         .navbar-item {
             color: rgba(white, 0.75) !important;

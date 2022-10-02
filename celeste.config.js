@@ -14,12 +14,12 @@ module.exports = {
         {
             key: 'CDJS_MINT',
             abi: MintingABI,
-            address: '0xa9f318ce445C1a9245462aB612543C9F103f27eF',
+            address: '0xc5Ff4D9f3Bf8Cd1493CD74131Bf05D5C67Dac06E',
         },
         {
             key: 'CDJS_ERC721',
             abi: ERC721ABI,
-            address: '0x0D6659e8D021CfAfa0e7dFbd3D470895f7f03628',
+            address: '0xe6AAa27b004f6eb2b664E9015C1bE699Bde690C0',
         },
     ],
     addressBook: {

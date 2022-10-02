@@ -40,7 +40,7 @@ $corners: 'top', 'right', 'bottom', 'left';
     .button.is-#{$colorName} {
         background: $color !important;
         border-color: $color !important;
-        color: white;
+        color: white !important;
 
         &:hover:enabled {
             background-color: lighten($color, 10) !important;

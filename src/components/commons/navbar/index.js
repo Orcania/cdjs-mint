@@ -93,7 +93,7 @@ const Navbar = () => {
             </div>
 
             <div className={`navbar-menu ${mobileActive ? 'is-active' : ''}`}>
-                <div className="navbar-start">
+                {/* <div className="navbar-start">
                     <div className="navbar-item ">
                         <Link href="/mint">
                             <a className="navbar-item has-text-white" onClick={handleNavbarItemClick} role="button">
@@ -101,7 +101,7 @@ const Navbar = () => {
                             </a>
                         </Link>
                     </div>
-                </div>
+                </div> */}
 
                 <div className="navbar-end">
                     <ConnectedWrapper

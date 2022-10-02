@@ -9,6 +9,7 @@ import { open_modal } from 'src/redux/actions';
 import { BigNum2NormalNum } from 'src/utils';
 import modals from 'src/static/app.modals';
 import { rpcs } from 'celeste.config';
+import useCountdown from 'src/hooks/useCountdown';
 
 const mintName = {
     gl: 'VIP List',
@@ -24,33 +25,10 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
 
     const [mintAmount, setMintAmount] = useState(1);
     const [totalPrice, setTotalPrice] = useState(+price);
-    const [mintable, setMintable] = useState(false);
     const [userListed, setUserListed] = useState(mintType === 'pm');
 
-    const fetchTime = async () => {
-        const data = await fetch('https://worldtimeapi.org/api/timezone/America/New_York');
-        const json = await data.json();
-        return json;
-    };
-
-    const checkIfMintable = async () => {
-        const { unixtime } = await fetchTime();
-
-        const currentTimeUTC = unixtime;
-
-        if (currentTimeUTC * 1000 >= mintDate) setMintable(true);
-    };
-
-    useEffect(() => {
-        if (mintDate === null) return undefined;
-
-        const interval = setInterval(() => {
-            checkIfMintable();
-        }, 1000);
-
-        return () => clearInterval(interval);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [mintDate]);
+    // eslint-disable-next-line no-unused-vars
+    const [_timeLeft, live] = useCountdown(mintDate);
 
     useEffect(() => {
         if (mintType === 'pm') return;
@@ -139,9 +117,9 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
 
     return (
         <div>
-            <h1 className="title is-6 has-text-= has-text-centered">Mint</h1>
+            <h1 className="title is-6 has-text-white has-text-centered">Mint</h1>
 
-            {active && mintable ? (
+            {active && live ? (
                 <>
                     <ConnectedWrapper>
                         <NetworkWrapper>
@@ -150,7 +128,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                     <div className="field">
                                         <div className="mint_buttons has-text-centered">
                                             <button
-                                                className="mint_button button is-hdark has-text-white mx-1"
+                                                className="mint_button button is-hdark2 has-text-white mx-1"
                                                 type="button"
                                                 disabled={mintAmount === 1}
                                                 onClick={handleDecrease}
@@ -158,13 +136,13 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                                 -
                                             </button>
                                             <input
-                                                className="input has-text-white1 has-border-2-hblue-o-10"
+                                                className="input has-text-white1 has-border-2-hwhite-o-10 has-bg-hdark has-text-white"
                                                 value={mintAmount}
-                                                style={{ width: '80px' }}
+                                                style={{ width: '100px' }}
                                                 onChange={handleInputChange}
                                             />
                                             <button
-                                                className="mint_button button is-hdark has-text-white mx-1"
+                                                className="mint_button button is-hdark2 has-text-white mx-1"
                                                 type="button"
                                                 disabled={mintAmount + userMints >= userMintLimit}
                                                 onClick={handleIncrease}
@@ -174,16 +152,18 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                         </div>
                                     </div>
 
+                                    <hr />
                                     <div className="info">
                                         <div className="field">
                                             <h1 className="has-text-white1 has-text-centered">
-                                                Total: {BigNum2NormalNum(totalPrice)} ETH
+                                                Total: {+BigNum2NormalNum(totalPrice)} ETH
                                             </h1>
                                         </div>
                                     </div>
+                                    <hr />
                                 </>
                             ) : (
-                                <h1 className="title is-6 has-text-white1 has-text-centered">
+                                <h1 className="title is-6 has-text-white has-text-centered">
                                     You are not on the Whitelist, sorry
                                 </h1>
                             )}
@@ -195,7 +175,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                             <ConnectedWrapper
                                 disconnectedComponent={
                                     <button
-                                        className="button is-fullwidth is-hdark has-text-white"
+                                        className="button is-fullwidth is-hdark2 has-text-white"
                                         type="button"
                                         style={{ width: '200px' }}
                                         onClick={handleOpenWalletsModal}
@@ -208,7 +188,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                     info={
                                         <SwitchNetworkButton
                                             chainId={4}
-                                            className="button is-fullwidth is-hdark has-text-white"
+                                            className="button is-fullwidth is-hdark2 has-text-white"
                                             type="button"
                                             style={{ width: '200px' }}
                                             onErrorCB={() => {}}
@@ -222,7 +202,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                             <div />
                                             {userMints >= userMintLimit ? (
                                                 <button
-                                                    className="button is-fullwidth is-hdark has-text-white1"
+                                                    className="button is-fullwidth is-hdark2 has-text-white1"
                                                     type="button"
                                                     style={{ width: '200px' }}
                                                     disabled
@@ -231,11 +211,10 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                                                 </button>
                                             ) : (
                                                 <button
-                                                    className={`button is-fullwidth is-hdark has-text-white ${
+                                                    className={`button is-fullwidth is-hdark2 has-text-white ${
                                                         loading ? 'is-loading' : ''
                                                     }`}
                                                     type="button"
-                                                    style={{ width: '200px' }}
                                                     onClick={handleMintClick}
                                                     disabled={
                                                         +mintAmount < 1 ||
@@ -255,7 +234,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
                 </>
             ) : (
                 <div>
-                    <h1 className="title is-6 has-text-white1 has-text-centered">
+                    <h1 className="title is-6 has-text-white has-text-centered">
                         {' '}
                         {`${mintName[mintType]}`} mint has not started yet
                     </h1>
