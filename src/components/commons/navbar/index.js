@@ -72,11 +72,16 @@ const Navbar = () => {
             aria-label="main navigation"
         >
             <div className="navbar-brand  py-2">
-                <Link href="/home">
-                    <a className="navbar-item" onClick={handleNavbarItemClick} role="button">
-                        <img src="./media/logo.png" width="120" alt="" />
-                    </a>
-                </Link>
+                <a
+                    href="https://www.chaoticdjs.com/"
+                    className="navbar-item"
+                    onClick={handleNavbarItemClick}
+                    role="button"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    <img src="./media/logo.png" width="120" alt="" />
+                </a>
 
                 <a
                     role="button"
