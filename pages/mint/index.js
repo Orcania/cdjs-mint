@@ -34,7 +34,7 @@ const mintDataBase = [
         dateTimestamp: 1664722800000,
         // dateTimestamp: 1664696440000,
         price: '80000000000000000',
-        userMintLimit: 2,
+        userMintLimit: 3,
         list: gl,
     },
     // {

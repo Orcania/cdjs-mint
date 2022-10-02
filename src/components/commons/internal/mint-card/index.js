@@ -1,6 +1,5 @@
 import { Card } from 'primereact/card';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { ProgressBar } from 'primereact/progressbar';
 import { Tag } from 'primereact/tag';
 
 import { BigNum2NormalNum } from 'src/utils';
@@ -8,24 +7,10 @@ import { BigNum2NormalNum } from 'src/utils';
 import useCountdown from 'src/hooks/useCountdown';
 
 import { ConnectedWrapper, NetworkWrapper } from '@celeste-js/react';
-import { useEffect, useState } from 'react';
 
-const Mintcard = ({ mintData, loading, scData }) => {
+const Mintcard = ({ mintData, loading }) => {
     const [timeLeft, live] = useCountdown(mintData.dateTimestamp || 0);
-    const [percentage, setPercentage] = useState(0);
 
-    useEffect(() => {
-        const pctg = (scData.totalMints / scData.totalSupply) * 100;
-        setPercentage(pctg);
-    }, [scData]);
-
-    const displayValueTemplate = () => {
-        return (
-            <span className="has-bg-hdark-o-2">
-                {scData.totalMints}/<b>{scData.totalSupply}</b>
-            </span>
-        );
-    };
     return (
         <Card
             title={mintData.title}
@@ -79,17 +64,6 @@ const Mintcard = ({ mintData, loading, scData }) => {
                     <ProgressSpinner style={{ width: '35px', height: '35px' }} />
                 ) : (
                     <>
-                        <div>
-                            <h2 className="has-text-centered has-text-white is-size-6">Total Mints</h2>
-                            <ProgressBar
-                                value={percentage}
-                                displayValueTemplate={displayValueTemplate}
-                                showValue
-                                style={{ height: '20px', width: '100%' }}
-                                className="pbar"
-                            />
-                        </div>
-                        <br />
                         <div>
                             <span>Price: </span>
                             <span>

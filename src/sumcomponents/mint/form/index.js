@@ -17,7 +17,7 @@ const mintName = {
     pm: 'Public',
 };
 
-const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, mintDate }) => {
+const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, mintDate }) => {
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
 
@@ -119,7 +119,7 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, active, m
         <div>
             <h1 className="title is-6 has-text-white has-text-centered">Mint</h1>
 
-            {active && live ? (
+            {live ? (
                 <>
                     <ConnectedWrapper>
                         <NetworkWrapper>
