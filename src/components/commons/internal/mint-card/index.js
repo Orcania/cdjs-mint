@@ -93,7 +93,6 @@ const Mintcard = ({ mintData, loading, mintType, onMint }) => {
                     )}
                 </div>
             </Card>
-            <hr />
             <br />
 
             <MintForm
