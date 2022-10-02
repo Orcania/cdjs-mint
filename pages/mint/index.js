@@ -100,7 +100,6 @@ const MintPage = () => {
         const address = walletReducer.isLoggedIn ? walletReducer.address : addressBook.ZERO;
 
         const glDataRes = await mintRead.mintData(mintTypes.gl, address);
-        console.log('glDataRes', glDataRes);
         // const wlDataRes = await mintRead.mintData(mintTypes.wl, address);
         // const pubDataRes = await mintRead.mintData(mintTypes.pm, address);
 
