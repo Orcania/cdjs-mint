@@ -76,8 +76,6 @@ const Navbar = () => {
                     className="navbar-item"
                     onClick={handleNavbarItemClick}
                     role="button"
-                    target="_blank"
-                    rel="noreferrer"
                 >
                     <img src="./media/logo.png" width="120" alt="" />
                 </a>
