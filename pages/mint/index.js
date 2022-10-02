@@ -34,7 +34,7 @@ const mintDataBase = [
         dateTimestamp: 1664722800000,
         // dateTimestamp: 1664696440000,
         price: '80000000000000000',
-        userMintLimit: 15,
+        userMintLimit: 2,
         list: gl,
     },
     // {
@@ -100,6 +100,7 @@ const MintPage = () => {
         const address = walletReducer.isLoggedIn ? walletReducer.address : addressBook.ZERO;
 
         const glDataRes = await mintRead.mintData(mintTypes.gl, address);
+        console.log('glDataRes', glDataRes);
         // const wlDataRes = await mintRead.mintData(mintTypes.wl, address);
         // const pubDataRes = await mintRead.mintData(mintTypes.pm, address);
 
