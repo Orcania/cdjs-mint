@@ -141,7 +141,7 @@ const MintPage = () => {
             const mintRead = mintProxy.read();
 
             const totalSupply = +(await mintRead.maxSupply()) + 1;
-            const totalMints = +(await mintRead.totalMints());
+            const totalMints = +(await mintRead.totalMints()) + 1;
 
             setSmartContractState({
                 totalSupply,
