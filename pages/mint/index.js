@@ -140,7 +140,7 @@ const MintPage = () => {
 
             const mintRead = mintProxy.read();
 
-            const totalSupply = +(await mintRead.maxSupply());
+            const totalSupply = +(await mintRead.maxSupply()) + 1;
             const totalMints = +(await mintRead.totalMints());
 
             setSmartContractState({
@@ -209,7 +209,9 @@ const MintPage = () => {
                                 ) : (
                                     <div className="has-text-centered">
                                         <h1 className="title is-6 has-text-white has-text-centered">Mint</h1>
-                                        <h1 className="title is-5 has-text-white">Sold Out</h1>
+                                        <h1 className="title is-5 has-text-white">
+                                            VIP Mint is now Sold Out. Stay tuned for the next Pre-Mint opening
+                                        </h1>
                                     </div>
                                 )}
                             </div>

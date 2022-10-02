@@ -9,7 +9,8 @@ class MintProxy {
 
     constructor() {
         const { web3Reducer } = celesteStore.getState();
-        this.#contractRead = web3Reducer.contracts['CDJS_MINT_READ.4'];
+        console.log('web3Reducer', web3Reducer);
+        this.#contractRead = web3Reducer.contracts['CDJS_MINT_READ.1'];
 
         // eslint-disable-next-line dot-notation
         if (web3Reducer.initialized) this.#contractWrite = web3Reducer.contracts['CDJS_MINT'];
