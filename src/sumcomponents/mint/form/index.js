@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js';
 import { toast } from 'react-toastify';
 import { ConnectedWrapper, NetworkWrapper, SwitchNetworkButton, useCelesteSelector } from '@celeste-js/react';
 
-import MintProxy from 'src/sc-proxies/mint';
+import Erc721Proxy from 'src/sc-proxies/erc721';
 import { open_modal } from 'src/redux/actions';
 import { BigNum2NormalNum } from 'src/utils';
 import modals from 'src/static/app.modals';
@@ -51,14 +51,11 @@ const MintForm = ({ userMintLimit, price, userMints, onMint, mintType, mintDate 
     };
 
     const handleMintClick = async () => {
-        const mintProxy = new MintProxy().write();
+        const mintProxy = new Erc721Proxy().write();
 
         setLoading(true);
         try {
-            const tx = await mintProxy.mint(
-                { type: `${mintType}Mint`, amount: mintAmount, price },
-                { from: walletReducer.address }
-            );
+            const tx = await mintProxy.mint({ amount: mintAmount, price }, { from: walletReducer.address });
             const txnHash = tx.transactionHash;
 
             const toastContent = () => (

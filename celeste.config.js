@@ -1,4 +1,4 @@
-const MintingABI = require('./src/static/abi/cdjs.json');
+// const MintingABI = require('./src/static/abi/cdjs.json');
 const ERC721ABI = require('./src/static/abi/erc721.json');
 
 module.exports = {
@@ -17,11 +17,11 @@ module.exports = {
         },
     },
     smartContracts: [
-        {
-            key: 'CDJS_MINT',
-            abi: MintingABI,
-            address: '0x78f369B8DF89078F140b57f4718623C0533786D2',
-        },
+        // {
+        //     key: 'CDJS_MINT',
+        //     abi: MintingABI,
+        //     address: '0x78f369B8DF89078F140b57f4718623C0533786D2',
+        // },
         {
             key: 'CDJS_ERC721',
             abi: ERC721ABI,

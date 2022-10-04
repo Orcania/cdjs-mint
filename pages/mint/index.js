@@ -11,9 +11,7 @@ import MintForm from 'src/sumcomponents/mint/form';
 
 import Mintcard from 'src/components/commons/internal/mint-card';
 
-import MintProxy from 'src/sc-proxies/mint';
-
-import { mintType2MethodName as mintTypes } from 'src/static/constants';
+import Erc721Proxy from 'src/sc-proxies/erc721';
 
 import mintLists from 'src/static/mint-lists';
 
@@ -60,8 +58,8 @@ const MintPage = () => {
     const { web3Reducer, walletReducer } = useCelesteSelector(state => state);
 
     const [smartContractState, setSmartContractState] = useState({
-        totalSupply: 1000,
-        totalMints: 0,
+        maxSupply: 1000,
+        totalSupply: 0,
     });
 
     const [mintDataState, setMintDataState] = useState({
@@ -93,13 +91,14 @@ const MintPage = () => {
         setLoading(true);
         setFetching(true);
 
-        const mintProxy = new MintProxy();
+        const erc721 = new Erc721Proxy();
 
-        const mintRead = mintProxy.read();
+        const scRead = erc721.read();
 
         const address = walletReducer.isLoggedIn ? walletReducer.address : addressBook.ZERO;
 
-        const glDataRes = await mintRead.mintData(mintTypes.gl, address);
+        const glDataRes = await scRead.pmData(address);
+
         // const wlDataRes = await mintRead.mintData(mintTypes.wl, address);
         // const pubDataRes = await mintRead.mintData(mintTypes.pm, address);
 
@@ -136,16 +135,16 @@ const MintPage = () => {
         if (!web3Reducer.readonly_initialized) return;
 
         (async () => {
-            const mintProxy = new MintProxy();
+            const mintProxy = new Erc721Proxy();
 
             const mintRead = mintProxy.read();
 
-            const totalSupply = +(await mintRead.maxSupply()) + 1;
-            const totalMints = +(await mintRead.totalMints()) + 1;
+            const maxSupply = +(await mintRead.maxSupply());
+            const totalSupply = +(await mintRead.totalSupply());
 
             setSmartContractState({
+                maxSupply,
                 totalSupply,
-                totalMints,
             });
         })();
     }, [web3Reducer.readonly_initialized]);
@@ -182,7 +181,6 @@ const MintPage = () => {
                             />
                         </figure>
                     </div>
-
                     {Object.keys(mintDataState).map(key => (
                         <>
                             <div key={key} className="column ">
@@ -195,7 +193,7 @@ const MintPage = () => {
                                 />
                             </div>
                             <div className="column has-text-white">
-                                {smartContractState.totalMints < smartContractState.totalSupply ? (
+                                {smartContractState.totalSupply < smartContractState.maxSupply ? (
                                     <MintForm
                                         userMintLimit={+mintDataState[key].userMintLimit}
                                         price={mintDataState[key].price}
@@ -217,19 +215,6 @@ const MintPage = () => {
                             </div>
                         </>
                     ))}
-
-                    {/* {Object.keys(mintDataState).map(key => {
-                        return (
-                            <div key={key} className="column is-4">
-                                <Mintcard
-                                    mintData={mintDataState[key]}
-                                    loading={loading}
-                                    mintType={key}
-                                    onMint={onMintCallback}
-                                />
-                            </div>
-                        );
-                    })} */}
                 </div>
             </div>
         </div>
